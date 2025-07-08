@@ -1,4 +1,4 @@
-﻿namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+﻿namespace GestaoDeEquipamentos.Dominio.Compartilhado;
 
 public abstract class EntidadeBase<Tipo>
 {

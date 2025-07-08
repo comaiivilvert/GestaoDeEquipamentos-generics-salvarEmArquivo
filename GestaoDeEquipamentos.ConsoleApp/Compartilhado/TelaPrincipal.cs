@@ -1,4 +1,7 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
+﻿using GestaoDeEquip.Infra.ModuloChamado;
+using GestaoDeEquip.Infra.ModuloEquipamento;
+using GestaoDeEquip.Infra.ModuloFabricante;
+using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 

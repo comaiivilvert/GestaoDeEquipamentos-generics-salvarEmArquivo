@@ -1,5 +1,9 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+﻿using GestaoDeEquip.Infra.ModuloEquipamento;
+using GestaoDeEquip.Infra.ModuloFabricante;
+using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
+using GestaoDeEquipamentos.Dominio.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
