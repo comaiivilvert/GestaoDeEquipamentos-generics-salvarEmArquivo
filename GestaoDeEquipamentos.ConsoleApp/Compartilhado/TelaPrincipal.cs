@@ -1,6 +1,7 @@
-﻿using GestaoDeEquip.Infra.ModuloChamado;
-using GestaoDeEquip.Infra.ModuloEquipamento;
-using GestaoDeEquip.Infra.ModuloFabricante;
+﻿using GestaoDeEquip.Infra.Arquivos.Compartilhado;
+using GestaoDeEquip.Infra.Arquivos.ModuloChamado;
+using GestaoDeEquip.Infra.Arquivos.ModuloFabricante;
+using GestaoDeEquip.Infra.Arquivos.moduloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
@@ -11,19 +12,24 @@ public class TelaPrincipal
 {
     private char opcaoEscolhida;
 
-    private RepositorioFabricante repositorioFabricante;
-    private RepositorioEquipamento repositorioEquipamento;
-    private RepositorioChamado repositorioChamado;
+    private ContextoDados contextoDados;
+
+    private RepositorioFabricanteEmArquivo repositorioFabricante;
+    private RepositorioEquipamentoEmArquivo repositorioEquipamento;
+    private RepositorioChamadoEmArquivo repositorioChamado;
 
     private TelaFabricante telaFabricante;
     private TelaEquipamento telaEquipamento;
     private TelaChamado telaChamado;
 
+
     public TelaPrincipal()
     {
-        repositorioFabricante = new RepositorioFabricante();
-        repositorioEquipamento = new RepositorioEquipamento();
-        repositorioChamado = new RepositorioChamado();
+        contextoDados = new ContextoDados(true);
+
+        repositorioFabricante = new RepositorioFabricanteEmArquivo(contextoDados);
+        repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contextoDados);
+        repositorioChamado = new RepositorioChamadoEmArquivo(contextoDados);
 
         telaFabricante = new TelaFabricante(repositorioFabricante);
 

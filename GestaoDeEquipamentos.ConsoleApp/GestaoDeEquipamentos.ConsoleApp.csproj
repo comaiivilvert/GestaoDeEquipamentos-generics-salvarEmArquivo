@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\GestaoDeEquip.Infra.Arquivos\GestaoDeEquip.Infra.Arquivos.csproj" />
     <ProjectReference Include="..\GestaoDeEquip.Infra.Memoria\GestaoDeEquip.Infra.Memoria.csproj" />
     <ProjectReference Include="..\GestaoDeEquipamentos.Dominio\GestaoDeEquipamentos.Dominio.csproj" />
   </ItemGroup>

@@ -1,7 +1,7 @@
-﻿using GestaoDeEquip.Infra.ModuloChamado;
-using GestaoDeEquip.Infra.ModuloEquipamento;
+﻿using GestaoDeEquip.Infra.Arquivos.ModuloChamado;
+using GestaoDeEquip.Infra.Arquivos.moduloEquipamento;
+using GestaoDeEquip.Infra.Arquivos.ModuloFabricante;
 using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
-using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.Dominio.ModuloChamado;
 using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
 
@@ -9,13 +9,13 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
 public class TelaChamado : TelaBase<Chamado>, ITela
 {
-    private RepositorioChamado repositorioChamado;
-    private RepositorioEquipamento repositorioEquipamento;
+    private RepositorioChamadoEmArquivo repositorioChamado;
+    private RepositorioEquipamentoEmArquivo repositorioEquipamento;
 
     public TelaChamado(
-        RepositorioChamado repositorioChamado,
-        RepositorioEquipamento repositorioEquipamento
-    ) : base("Chamado", repositorioChamado)
+        RepositorioChamadoEmArquivo repositorioChamado,
+        RepositorioEquipamentoEmArquivo repositorioEquipamento
+    ) : base("Chamados", repositorioChamado)
     {
         this.repositorioChamado = repositorioChamado;
         this.repositorioEquipamento = repositorioEquipamento;

@@ -11,7 +11,7 @@ namespace GestaoDeEquip.Infra.Arquivos.Compartilhado
     {
         public List<Fabricante> Fabricantes { get; set; }
         public List<Equipamento> Equipamentos { get; set; }
-        public List<Chamado> Chamado { get; set; }
+        public List<Chamado> Chamados { get; set; }
 
         private string pastaArmazenamento = "C:\\temp";
         private string arquivosArmazenamento = "dados.json";
@@ -26,7 +26,7 @@ namespace GestaoDeEquip.Infra.Arquivos.Compartilhado
         {
             Fabricantes = new List<Fabricante>();
             Equipamentos = new List<Equipamento>();
-            Chamado = new List<Chamado>();
+            Chamados = new List<Chamado>();
         }
 
         public void Salvar()
@@ -67,7 +67,7 @@ namespace GestaoDeEquip.Infra.Arquivos.Compartilhado
             
             this.Fabricantes = contextoArmazenado.Fabricantes;
             this.Equipamentos = contextoArmazenado.Equipamentos;
-            this.Chamado = contextoArmazenado.Chamado;
+            this.Chamados = contextoArmazenado.Chamados;
 
         }
 

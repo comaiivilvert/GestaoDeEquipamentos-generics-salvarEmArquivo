@@ -1,4 +1,5 @@
-﻿using GestaoDeEquip.Infra.Compartilhado;
+﻿using GestaoDeEquip.Infra.Arquivos.ModuloFabricante;
+using GestaoDeEquip.Infra.Compartilhado;
 using GestaoDeEquipamentos.Dominio.Compartilhado;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado;
@@ -6,13 +7,15 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 public abstract class TelaBase<T> where T : EntidadeBase<T>
 {
     protected string nomeEntidade;
-    private RepositorioBase<T> repositorio;
+    private RepositorioBaseEmArquivo<T> repositorio;
 
-    protected TelaBase(string nomeEntidade, RepositorioBase<T> repositorio)
+
+    protected TelaBase(string nomeEntidade, RepositorioBaseEmArquivo<T> repositorio)
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
     }
+
 
     public void ExibirCabecalho()
     {

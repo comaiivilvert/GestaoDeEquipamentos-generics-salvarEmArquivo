@@ -9,7 +9,12 @@ public class Fabricante : EntidadeBase<Fabricante>
     public string Email { get; set; }
     public string Telefone { get; set; }
 
-    public Fabricante(string nome, string email, string telefone)
+    public Fabricante()
+    {
+
+    }
+
+    public Fabricante(string nome, string email, string telefone) : this()
     {
         this.Nome = nome;
         this.Email = email;

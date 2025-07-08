@@ -1,4 +1,4 @@
-﻿
+﻿using GestaoDeEquip.Infra.Arquivos.ModuloFabricante;
 using GestaoDeEquip.Infra.ModuloFabricante;
 using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 using GestaoDeEquipamentos.Dominio.ModuloFabricante;
@@ -7,9 +7,9 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 public class TelaFabricante : TelaBase<Fabricante>, ITela
 {
-    private RepositorioFabricante repositorioFabricante;
+    private RepositorioFabricanteEmArquivo repositorioFabricante;
 
-    public TelaFabricante(RepositorioFabricante repositorioFabricante) 
+    public TelaFabricante(RepositorioFabricanteEmArquivo repositorioFabricante) 
         : base("Fabricante", repositorioFabricante)
     {
         this.repositorioFabricante = repositorioFabricante;
