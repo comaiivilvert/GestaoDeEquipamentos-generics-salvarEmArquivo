@@ -1,0 +1,15 @@
+﻿@using GestaoDeEquipamentos.Dominio.ModuloFabricante
+@model Fabricante;
+
+<h1>Exclusão de Fabricantes</h1>
+
+<hr />
+
+<a href="/Fabricante/Index">Visualizar Fabricantes</a>
+
+<form action="/Fabricante/ExcluirConfirmado/@Model.Id" method="post">
+  <p>Deseja Realmente Excluir o Registro "@Model.Nome"?</p>
+
+  <a href="/Fabricante">Voltar</a>
+    <button>Gravar</button>
+    </form>
