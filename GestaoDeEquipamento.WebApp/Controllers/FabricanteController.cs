@@ -87,7 +87,7 @@ namespace GestaoDeEquipamento.WebApp.Controllers
         [HttpPost]
         public IActionResult ExcluirConfirmado(int Id)
         {
-
+            
             repositorioFabricante.ExcluirRegistro(Id);
 
             return RedirectToAction(nameof(Index));
