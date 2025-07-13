@@ -5,16 +5,16 @@ namespace GestaoDeEquipamentos.Dominio.ModuloChamado;
 
 public class Chamado : EntidadeBase<Chamado>
 {
-    public string Titulo { get; set; }public Chamado()
-    {
-
-    }
+    public string Titulo { get; set; }
     public string Descricao { get; set; }
     public DateTime DataAbertura { get; set; }
     public Equipamento Equipamento { get; set; }
 
+    public Chamado()
+    {
 
-    
+    }
+
     public Chamado(
         string titulo,
         string descricao,

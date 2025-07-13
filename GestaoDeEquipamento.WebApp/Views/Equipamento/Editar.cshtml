@@ -1,5 +1,6 @@
-﻿@using GestaoDeEquipamentos.Dominio.ModuloFabricante
-@model Fabricante;
+﻿@using GestaoDeEquipamentos.Dominio.ModuloEquipamento
+@using GestaoDeEquipamentos.Dominio.ModuloFabricante
+@model Equipamento;
 
 
 <html>
@@ -11,7 +12,7 @@
     @* Bootstrap Icons *@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <title>Edição de Fabricantes | Gestão de Equipamentos</title>
+    <title>Edição de Equipamento | Gestão de Equipamentos</title>
 </head>
 <body data-bs-theme="dark">
     @* Barra de Navegação / Navbar *@
@@ -39,9 +40,9 @@
 
     @* Cabeçalho com o Título da Página Atual *@
     <header class="container my-4">
-        <h1>Edição de Fabricantes</h1>
+        <h1>Edição de Equipamentos</h1>
 
-        <a class="btn btn-primary mt-4" href="/Fabricante/Cadastrar">
+        <a class="btn btn-primary mt-4" href="/Equipamento/Cadastrar">
             <i class="bi bi-plus-circle"></i>
             Cadastrar Novo
         </a>
@@ -52,24 +53,39 @@
     @* Conteúdo Principal da Página *@
     <main class="container my-4">
         <div class="row justify-content-center">
-            <form class="col-6" action="/Equipamento/Editar/@Model.Id" method="post">
+            <form class="col-6" action="/Equipamento/Cadastrar" method="post">
                 <div class="mb-3">
                     <label for="Nome" class="form-label">Nome</label>
                     <input class="form-control" name="Nome" value="@Model.Nome">
                 </div>
 
                 <div class="mb-3">
-                    <label for="Email" class="form-label">Email</label>
-                    <input class="form-control" name="Email" value="@Model.Email">
+                    <label for="PrecoAquisicao" class="form-label">Preço de Aquisição</label>
+                    <input class="form-control" name="PrecoAquisicao" value="@Model.PrecoAquisicao">
                 </div>
 
-                <div class="mb-5">
-                    <label for="Telefone" class="form-label">Telefone</label>
-                    <input class="form-control" name="Telefone" value="@Model.Telefone">
+                <div class="mb-3">
+                    <label for="NumeroSerie" class="form-label">Numero de Série:</label>
+                    <input class="form-control" name="NumeroSerie" value="@Model.NumeroSerie">
+                </div>
+
+                <div class="mb-3">
+                    <label for="Fabricante" class="form-label">Fabricante:</label>
+                    <select class="form-select" name="fabricanteId">
+                        <option selected disabled>Selectione uma opção</option>
+                        @* @foreach (Fabricante f in Model) /// PRECISA IMPLEMENTAR O EDITAR FAB.
+                        { *@
+                            <option value="teste">teste</option>
+                        @* } *@
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="DataFabricacao" class="form-label">Data de Fabricação</label>
+                    <input class="form-control" name="DataFabricacao" value="@Model.DataFabricacao">
                 </div>
 
                 <div class="d-flex gap-2 justify-content-end">
-                    <a href="/Fabricante" class="btn btn-outline-primary px-5 ">Voltar</a>
+                    <a href="/Equipamento" class="btn btn-outline-primary px-5 ">Voltar</a>
                     <button class="btn btn-primary px-5">Gravar</button>
                 </div>
             </form>
