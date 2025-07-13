@@ -46,6 +46,59 @@ namespace GestaoDeEquipamento.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public IActionResult Editar(int Id)
+        {
+
+            Chamado chamadoSelecionado = repositorioChamado.SelecionarRegistroPorId(Id);
+
+            if (chamadoSelecionado == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(chamadoSelecionado);
+        }
+
+
+        [HttpPost]
+        public IActionResult Editar(int id, string titulo, string descricao, DateTime dataAbertura, int equipamentoId)
+        {
+
+            Equipamento novoEquipamento = repositorioEquipamento.SelecionarRegistroPorId(equipamentoId);
+
+            Chamado chamadoEditado = new Chamado(titulo, descricao, dataAbertura, novoEquipamento);
+
+            bool edicaoConcluida = repositorioChamado.EditarRegistro(id, chamadoEditado);
+
+            if (!edicaoConcluida)
+            {
+                chamadoEditado.Id = id;
+                return View(chamadoEditado);
+
+            }
+
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Excluir(int Id)
+        {
+
+            Chamado chamadoSelecionado = repositorioChamado.SelecionarRegistroPorId(Id);
+
+            if (chamadoSelecionado == null)
+                return RedirectToAction(nameof(Index));
+
+            return View(chamadoSelecionado);
+        }
+
+        [HttpPost]
+        public IActionResult ExcluirConfirmado(int Id)
+        {
+
+            repositorioChamado.ExcluirRegistro(Id);
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
 
     }
 }
