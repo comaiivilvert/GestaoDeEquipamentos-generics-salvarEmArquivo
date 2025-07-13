@@ -87,7 +87,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         VisualizarRegistros(false);
 
         Console.Write("Digite o ID do registro que deseja selecionar: ");
-        int idRegistro = Convert.ToInt32(Console.ReadLine());
+        Guid idRegistro = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine();
 
@@ -128,7 +128,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         VisualizarRegistros(false);
 
         Console.Write("Digite o ID do registro que deseja selecionar: ");
-        int idRegistro = Convert.ToInt32(Console.ReadLine());
+        Guid idRegistro = Convert.ToInt32(Console.ReadLine());
 
         Console.WriteLine();
 
