@@ -33,7 +33,7 @@ namespace GestaoDeEquipamento.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(string nome, decimal precoAquisicao, string numeroSerie, int fabricanteId, DateTime dataFabricacao)
+        public IActionResult Cadastrar(string nome, decimal precoAquisicao, string numeroSerie, Guid fabricanteId, DateTime dataFabricacao)
         {
 
 
@@ -46,7 +46,7 @@ namespace GestaoDeEquipamento.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Editar(int Id)
+        public IActionResult Editar(Guid Id)
         {
 
             Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(Id);
@@ -61,7 +61,7 @@ namespace GestaoDeEquipamento.WebApp.Controllers
 
 
         [HttpPost]
-        public IActionResult Editar(int id, string nome, decimal precoAquisicao, string numeroSerie, int fabricanteId, DateTime dataFabricacao)
+        public IActionResult Editar(Guid id, string nome, decimal precoAquisicao, string numeroSerie, Guid fabricanteId, DateTime dataFabricacao)
         {
 
             Fabricante novoFabricante = repositorioFabricante.SelecionarRegistroPorId(fabricanteId);
@@ -80,7 +80,7 @@ namespace GestaoDeEquipamento.WebApp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Excluir(int Id)
+        public IActionResult Excluir(Guid Id)
         {
 
             Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(Id);
@@ -92,7 +92,7 @@ namespace GestaoDeEquipamento.WebApp.Controllers
         }
 
         [HttpPost]
-        public IActionResult ExcluirConfirmado(int Id)
+        public IActionResult ExcluirConfirmado(Guid Id)
         {
 
             repositorioEquipamento.ExcluirRegistro(Id);

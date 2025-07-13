@@ -9,7 +9,7 @@ public abstract class RepositorioBase<Tipo> where Tipo : EntidadeBase<Tipo>
 
     public void CadastrarRegistro(Tipo novoRegistro)
     {
-        novoRegistro.Id = ++contadorIds;
+        novoRegistro.Id = Guid.NewGuid();
 
         registros.Add(novoRegistro);
     }

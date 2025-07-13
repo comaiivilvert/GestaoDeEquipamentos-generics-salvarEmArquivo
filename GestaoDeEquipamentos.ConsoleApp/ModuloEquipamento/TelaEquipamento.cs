@@ -95,7 +95,7 @@ public class TelaEquipamento : TelaBase<Equipamento>, ITela
         VisualizarFabricantes();
 
         Console.Write("Digite o id do fabricante do equipamento: ");
-        int idFabricante = Convert.ToInt32(Console.ReadLine());
+        Guid idFabricante = Guid.Parse(Console.ReadLine());
 
         Fabricante fabricanteSelecionado =
             repositorioFabricante.SelecionarRegistroPorId(idFabricante);

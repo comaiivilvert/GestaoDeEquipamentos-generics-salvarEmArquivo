@@ -61,7 +61,7 @@ public class TelaChamado : TelaBase<Chamado>, ITela
         VisualizarEquipamentos();
 
         Console.Write("Digite o ID do equipamento que deseja selecionar: ");
-        int idEquipamento = Convert.ToInt32(Console.ReadLine());
+        Guid idEquipamento = Guid.Parse(Console.ReadLine());
 
         Equipamento equipamentoSelecionado =
             repositorioEquipamento.SelecionarRegistroPorId(idEquipamento);

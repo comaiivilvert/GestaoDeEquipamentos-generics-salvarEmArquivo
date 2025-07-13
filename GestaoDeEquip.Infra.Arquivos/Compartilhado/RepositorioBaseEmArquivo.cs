@@ -18,14 +18,14 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
 
     public void CadastrarRegistro(Tipo novoRegistro)
     {
-        novoRegistro.Id = ++contadorIds;
+        novoRegistro.Id = Guid.NewGuid();
 
         registros.Add(novoRegistro);
 
         contexto.Salvar();
     }
 
-    public bool EditarRegistro(int idSelecionado, Tipo registroAtualizado)
+    public bool EditarRegistro(Guid idSelecionado, Tipo registroAtualizado)
     {
         Tipo registroSelecionado = SelecionarRegistroPorId(idSelecionado);
 
@@ -40,7 +40,7 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
         return true;
     }
 
-    public bool ExcluirRegistro(int idSelecionado)
+    public bool ExcluirRegistro(Guid idSelecionado)
     {
         Tipo registroSelecionado = SelecionarRegistroPorId(idSelecionado);
 
@@ -59,7 +59,7 @@ public abstract class RepositorioBaseEmArquivo<Tipo> where Tipo : EntidadeBase<T
         return registros;
     }
 
-    public Tipo SelecionarRegistroPorId(int idSelecionado)
+    public Tipo SelecionarRegistroPorId(Guid idSelecionado)
     {
         foreach (Tipo registro in registros)
         {
