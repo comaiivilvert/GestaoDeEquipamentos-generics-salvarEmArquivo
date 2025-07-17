@@ -11,4 +11,8 @@
     <ProjectReference Include="..\GestaoDeEquipamentos.Dominio\GestaoDeEquipamentos.Dominio.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\NewFolder\" />
+  </ItemGroup>
+
 </Project>

@@ -1,5 +1,9 @@
 ﻿@using GestaoDeEquipamentos.Dominio.ModuloFabricante 
-@model List<Fabricante>;
+@model List<Fabricante>
+
+    @{
+        List<Fabricante> fabricantes = ViewBag.Fabricantes;
+    }
 ﻿
 <html>
 <head>
@@ -66,7 +70,7 @@
                     <label for="Fabricante" class="form-label">Fabricante:</label>
                     <select class="form-select" name="fabricanteId" aria-label="Fabricantes">
                     <option selected>Selectione uma opção</option>
-                    @foreach (Fabricante f in Model)
+                    @foreach (Fabricante f in fabricantes)
                     {
                         <option value="@f.Id">@f.Nome</option>
                     }
@@ -74,7 +78,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="DataFabricacao" class="form-label">Data de Fabricação</label>
-                    <input class="form-control" name="DataFabricacao">
+                    <input class="form-control" type="date" name="DataFabricacao">
                 </div>
 
                 <div class="d-flex gap-2 justify-content-end">

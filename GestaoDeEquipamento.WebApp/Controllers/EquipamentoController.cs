@@ -29,7 +29,9 @@ namespace GestaoDeEquipamento.WebApp.Controllers
         public IActionResult Cadastrar()
         {
             var fabricantes = repositorioFabricante.SelecionarRegistros();
-            return View(fabricantes);
+            ViewBag.Fabricantes = fabricantes;
+            
+            return View();
         }
 
         [HttpPost]
@@ -48,6 +50,9 @@ namespace GestaoDeEquipamento.WebApp.Controllers
 
         public IActionResult Editar(Guid Id)
         {
+
+            var fabricantes = repositorioFabricante.SelecionarRegistros();
+            ViewBag.Fabricantes = fabricantes;
 
             Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(Id);
 
