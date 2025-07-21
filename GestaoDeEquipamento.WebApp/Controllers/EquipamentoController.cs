@@ -1,6 +1,7 @@
 ﻿using GestaoDeEquip.Infra.Arquivos.Compartilhado;
 using GestaoDeEquip.Infra.Arquivos.moduloEquipamento;
 using GestaoDeEquip.Infra.Arquivos.ModuloFabricante;
+using GestaoDeEquipamento.WebApp.Models;
 using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
 using GestaoDeEquipamentos.Dominio.ModuloFabricante;
 using Microsoft.AspNetCore.Mvc;
@@ -22,26 +23,37 @@ namespace GestaoDeEquipamento.WebApp.Controllers
         public IActionResult Index()
         {
             List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
-            return View(equipamentos);
+            VisualizarEquipamentosViewModel visualizarVm = new VisualizarEquipamentosViewModel(equipamentos);
+
+            return View(visualizarVm);
             
         }
 
         public IActionResult Cadastrar()
         {
             var fabricantes = repositorioFabricante.SelecionarRegistros();
-            ViewBag.Fabricantes = fabricantes;
+
+            CadastrarEquipamentoViewModel cadastrarVm = new CadastrarEquipamentoViewModel(fabricantes);
             
-            return View();
+            return View(cadastrarVm);
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(string nome, decimal precoAquisicao, string numeroSerie, Guid fabricanteId, DateTime dataFabricacao)
+        public IActionResult Cadastrar(CadastrarEquipamentoViewModel cadastrarVm)
         {
+            Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(cadastrarVm.FabricanteId);
 
+            if (fabricanteSelecionado == null)
+            {
+                return RedirectToAction(nameof(Index));
+            }
 
-            Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(fabricanteId);
-
-            Equipamento novoEquipamento = new Equipamento(nome, precoAquisicao, numeroSerie, fabricanteSelecionado, dataFabricacao);
+            Equipamento novoEquipamento = new Equipamento(
+                cadastrarVm.Nome, 
+                cadastrarVm.PrecoAquisicao, 
+                cadastrarVm.NumeroSerie, 
+                fabricanteSelecionado, 
+                cadastrarVm.DataFabricacao);
 
             repositorioEquipamento.CadastrarRegistro(novoEquipamento);
 

@@ -1,15 +1,13 @@
-﻿@using GestaoDeEquipamentos.Dominio.ModuloFabricante 
+﻿@using GestaoDeEquipamento.WebApp.Models
+@using GestaoDeEquipamentos.Dominio.ModuloFabricante 
 
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastro de Equipamentos";
 }
 
-@model List<Fabricante>
+@model CadastrarEquipamentoViewModel;
 
-    @{
-        List<Fabricante> fabricantes = ViewBag.Fabricantes;
-    }
 ﻿
 
         <div class="row justify-content-center">
@@ -30,10 +28,10 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="Fabricante" class="form-label">Fabricante:</label>
-                    <select class="form-select" name="fabricanteId" aria-label="Fabricantes">
+                    <label for="FabricanteId" class="form-label">Fabricante:</label>
+                    <select class="form-select" name="FabricanteId" aria-label="Fabricantes">
                     <option selected>Selectione uma opção</option>
-                    @foreach (Fabricante f in fabricantes)
+                    @foreach (SelecionarFabricanteViewModel f in Model.FabricantesDisponiveis)
                     {
                         <option value="@f.Id">@f.Nome</option>
                     }
