@@ -1,17 +1,14 @@
-﻿@using GestaoDeEquipamentos.Dominio.ModuloEquipamento
+﻿@using GestaoDeEquipamento.WebApp.Models
+@using GestaoDeEquipamentos.Dominio.ModuloEquipamento
 @using GestaoDeEquipamentos.Dominio.ModuloFabricante
-@model Equipamento;
+
 
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Edição de Equipamentos";
 }
 
-@{
-    List<Fabricante> fabricantes = ViewBag.Fabricantes;
-}
-
-
+@model EditarEquipamentoViewModel;
 
         <div class="row justify-content-center">
             <form class="col-6" action="/Equipamento/Editar/@Model.Id" method="post">
@@ -34,20 +31,21 @@
                     <label for="fabricanteId" class="form-label">Fabricante:</label>
                     <select class="form-select" name="fabricanteId">
                         <option selected disabled>Selectione uma opção</option>
-                        @foreach (Fabricante f in fabricantes)
+                        @foreach (SelecionarFabricanteViewModel f in Model.FabricantesDisponiveis)
                         {
                             <option value="@f.Id">@f.Nome</option>
                         }
                     </select>
                 </div>
+                
                 <div class="mb-3">
                     <label for="DataFabricacao" class="form-label">Data de Fabricação</label>
-                    <input class="form-control" type ="date" name="DataFabricacao" value="@Model.DataFabricacao">
+            <input class="form-control" type="date" name="DataFabricacao" value="@Model.DataFabricacao.ToString("yyyy-MM-dd")>"
                 </div>
 
                 <div class="d-flex gap-2 justify-content-end">
-                    <a href="/Equipamento" class="btn btn-outline-primary px-5 ">Voltar</a>
-                    <button class="btn btn-primary px-5">Gravar</button>
+                    <a href="/Equipamento" class="btn btn-outline-primary px-5 mt-3">Voltar</a>
+                    <button class="btn btn-primary px-5 mt-3">Gravar</button>
                 </div>
             </form>
         </div>

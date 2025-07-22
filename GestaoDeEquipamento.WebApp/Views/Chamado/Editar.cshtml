@@ -1,11 +1,12 @@
 ﻿@using GestaoDeEquipamentos.Dominio.ModuloChamado
+@using GestaoDeEquipamentos.WebApp.Models
 
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Edição de Chamados";
 }
 
-@model Chamado;
+@model EditarChamadoViewModel;
 
 
 
@@ -18,22 +19,22 @@
 
                 <div class="mb-3">
                     <label for="Descricao" class="form-label">Descrição:</label>
-                    <input class="form-control" name="Descricao" value="@Model.Descricao">
+            <textarea class="form-control" name="Descricao">@Model.Descricao</textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="DataAbertura" class="form-label">Data de Abertura:</label>
-                    <input class="form-control" name="DataAbertura" value="@Model.DataAbertura">
+            <input class="form-control" name="DataAbertura" type="date" value="@Model.DataAbertura.ToString("yyyy-MM-dd")">
                 </div>
 
                 <div class="mb-3">
-                    <label for="Equipamento" class="form-label">Equipamento:</label>
-                    <select class="form-select" name="equipamentoId">
+                    <label for="EquipamentoId" class="form-label">Equipamento:</label>
+                    <select class="form-select" name="EquipamentoId">
                         <option selected disabled>Selectione uma opção</option>
-                        @* @foreach (Equipamento e in Model) /// PRECISA IMPLEMENTAR O EDITAR CH.
-                        { *@
-                            <option value="teste">teste</option>
-                        @* } *@
+                        @foreach (SelecionarEquipamentoViewModel e in Model.EquipamentosDisponiveis) 
+                            { 
+                                <option value="@e.Id">@e.Nome</option>
+                            }
                     </select>
                 </div>
 

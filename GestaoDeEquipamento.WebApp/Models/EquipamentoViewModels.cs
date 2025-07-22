@@ -36,7 +36,7 @@ namespace GestaoDeEquipamento.WebApp.Models
         public string Nome { get; set; }
         public decimal PrecoAquisicao { get; set; }
         public string NumeroSerie { get; set; }
-        public int FabricanteId { get; set; }
+        public Guid FabricanteId { get; set; }
         public List<SelecionarFabricanteViewModel> FabricantesDisponiveis { get; set; }
         public DateTime DataFabricacao { get; set; }
 
@@ -50,7 +50,7 @@ namespace GestaoDeEquipamento.WebApp.Models
             string nome,
             decimal precoAquisicao,
             string numeroSerie,
-            int fabricanteId,
+            Guid fabricanteId,
             List<Fabricante> fabricantes,
             DateTime dataFabricacao
         ) : this()

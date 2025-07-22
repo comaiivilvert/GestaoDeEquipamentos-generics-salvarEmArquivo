@@ -1,10 +1,9 @@
 ﻿using GestaoDeEquip.Infra.Arquivos.Compartilhado;
 using GestaoDeEquip.Infra.Arquivos.ModuloChamado;
 using GestaoDeEquip.Infra.Arquivos.moduloEquipamento;
-using GestaoDeEquip.Infra.Arquivos.ModuloFabricante;
 using GestaoDeEquipamentos.Dominio.ModuloChamado;
 using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
-using GestaoDeEquipamentos.Dominio.ModuloFabricante;
+using GestaoDeEquipamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoDeEquipamento.WebApp.Controllers
@@ -24,22 +23,28 @@ namespace GestaoDeEquipamento.WebApp.Controllers
         public IActionResult Index()
         {
             List<Chamado> chamados = repositorioChamado.SelecionarRegistros();
-            return View(chamados);
+
+            VisualizarChamadosViewModel visualizarVm = new VisualizarChamadosViewModel(chamados);
+
+            return View(visualizarVm);
         }
 
         public IActionResult Cadastrar()
         {
             var equipamentos = repositorioEquipamento.SelecionarRegistros();
-            return View(equipamentos);
+            
+            CadastrarChamadoViewModel cadastrarVm = new CadastrarChamadoViewModel(equipamentos);
+
+            return View(cadastrarVm);
         }
 
         [HttpPost]
-        public IActionResult Cadastrar(string titulo, string descricao, DateTime dataAbertura, Guid equipamentoId)
+        public IActionResult Cadastrar(CadastrarChamadoViewModel cadastrarVm)
         {
 
-            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(equipamentoId);
+            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(cadastrarVm.EquipamentoId);
 
-            Chamado novoChamado = new Chamado(titulo, descricao, dataAbertura, equipamentoSelecionado);
+            Chamado novoChamado = new Chamado(cadastrarVm.Titulo, cadastrarVm.Descricao, cadastrarVm.DataAbertura, equipamentoSelecionado);
 
             repositorioChamado.CadastrarRegistro(novoChamado);
 
@@ -51,29 +56,30 @@ namespace GestaoDeEquipamento.WebApp.Controllers
 
             Chamado chamadoSelecionado = repositorioChamado.SelecionarRegistroPorId(Id);
 
-            if (chamadoSelecionado == null)
-                return RedirectToAction(nameof(Index));
+            List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
 
-            return View(chamadoSelecionado);
+            EditarChamadoViewModel editarVm = new EditarChamadoViewModel(
+                chamadoSelecionado.Id,
+                chamadoSelecionado.Titulo,
+                chamadoSelecionado.Descricao,
+                chamadoSelecionado.DataAbertura,
+                chamadoSelecionado.Equipamento.Id,
+                equipamentos
+                );
+
+            return View(editarVm);
         }
 
 
         [HttpPost]
-        public IActionResult Editar(Guid id, string titulo, string descricao, DateTime dataAbertura, Guid equipamentoId)
+        public IActionResult Editar(Guid Id,EditarChamadoViewModel editarVm)
         {
 
-            Equipamento novoEquipamento = repositorioEquipamento.SelecionarRegistroPorId(equipamentoId);
+            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(editarVm.EquipamentoId);
 
-            Chamado chamadoEditado = new Chamado(titulo, descricao, dataAbertura, novoEquipamento);
+            Chamado chamadoEditado = new Chamado(editarVm.Titulo, editarVm.Descricao, editarVm.DataAbertura, equipamentoSelecionado);
 
-            bool edicaoConcluida = repositorioChamado.EditarRegistro(id, chamadoEditado);
-
-            if (!edicaoConcluida)
-            {
-                chamadoEditado.Id = id;
-                return View(chamadoEditado);
-
-            }
+            repositorioChamado.EditarRegistro(Id, chamadoEditado);
 
             return RedirectToAction(nameof(Index));
         }
@@ -83,10 +89,9 @@ namespace GestaoDeEquipamento.WebApp.Controllers
 
             Chamado chamadoSelecionado = repositorioChamado.SelecionarRegistroPorId(Id);
 
-            if (chamadoSelecionado == null)
-                return RedirectToAction(nameof(Index));
+            ExcluirChamadoViewModel excluirVm = new ExcluirChamadoViewModel(chamadoSelecionado.Id, chamadoSelecionado.Titulo);
 
-            return View(chamadoSelecionado);
+            return View(excluirVm);
         }
 
         [HttpPost]

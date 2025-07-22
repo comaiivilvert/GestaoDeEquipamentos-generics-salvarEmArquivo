@@ -1,4 +1,5 @@
 ﻿@using GestaoDeEquipamentos.Dominio.ModuloEquipamento
+@using GestaoDeEquipamentos.WebApp.Models
 
 @{
     Layout = "_Layout";
@@ -6,31 +7,31 @@
 }
 ﻿
 
-@model List<Equipamento>
+@model CadastrarChamadoViewModel;
 
 
         <div class="row justify-content-center">
             <form class="col-6" action="/Chamado/Cadastrar" method="post">
                 <div class="mb-3">
                     <label for="Titulo" class="form-label">Titulo:</label>
-                    <input class="form-control" name="Titulo">
+                    <input class="form-control" name="Titulo" value="@Model.Titulo">
                 </div>
 
                 <div class="mb-3">
                     <label for="Descricao" class="form-label">Descrição:</label>
-                    <input class="form-control" name="Descricao">
+            <textarea class="form-control" name="Descricao" value="@Model.Descricao"></textarea>
                 </div>
 
                 <div class="mb-3">
                     <label for="DataAbertura" class="form-label">Data de Abertura:</label>
-                    <input class="form-control" name="DataAbertura">
+            <input class="form-control" name="DataAbertura" type="date" value="@Model.DataAbertura>"
                 </div>
 
                 <div class="mb-3">
-                    <label for="Equipamento" class="form-label">Equipamento:</label>
-                    <select class="form-select" name="equipamentoId">
+            <label for="EquipamentoId" class="form-label">Equipamento:</label>
+            <select class="form-select" name="EquipamentoId" value="@Model.EquipamentoId>"
                         <option selected>Selectione uma opção</option>
-                        @foreach (Equipamento e in Model)
+                        @foreach (SelecionarEquipamentoViewModel e in Model.EquipamentosDisponiveis)
                         {
                             <option value="@e.Id">@e.Nome</option>
                         }
@@ -38,7 +39,7 @@
                 </div>
                
                 <div class="d-flex gap-2 justify-content-end">
-                    <a href="/Equipamento" class="btn btn-outline-primary px-5 ">Voltar</a>
+                    <a href="/Chamado" class="btn btn-outline-primary px-5 ">Voltar</a>
                     <button class="btn btn-primary px-5">Gravar</button>
                 </div>
             </form>

@@ -62,39 +62,45 @@ namespace GestaoDeEquipamento.WebApp.Controllers
 
         public IActionResult Editar(Guid Id)
         {
+            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(Id);
 
             var fabricantes = repositorioFabricante.SelecionarRegistros();
-            ViewBag.Fabricantes = fabricantes;
 
-            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(Id);
+            EditarEquipamentoViewModel editarVm = new EditarEquipamentoViewModel(
+                equipamentoSelecionado.Id,
+                equipamentoSelecionado.Nome,
+                equipamentoSelecionado.PrecoAquisicao,
+                equipamentoSelecionado.NumeroSerie,
+                equipamentoSelecionado.Fabricante.Id,
+                fabricantes,
+                equipamentoSelecionado.DataFabricacao
+                );
+
 
             if (equipamentoSelecionado == null)
                 return RedirectToAction(nameof(Index));
 
-
-
-            return View(equipamentoSelecionado);
+            return View(editarVm);
         }
 
 
         [HttpPost]
-        public IActionResult Editar(Guid id, string nome, decimal precoAquisicao, string numeroSerie, Guid fabricanteId, DateTime dataFabricacao)
+        public IActionResult Editar(Guid Id, EditarEquipamentoViewModel editarVm)
         {
 
-            Fabricante novoFabricante = repositorioFabricante.SelecionarRegistroPorId(fabricanteId);
+            Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(editarVm.FabricanteId);
             
-            Equipamento equipamentoEditado = new Equipamento(nome, precoAquisicao, numeroSerie, novoFabricante,  dataFabricacao);
+            Equipamento equipamentoEditado = new Equipamento
+                
+                (editarVm.Nome, 
+                editarVm.PrecoAquisicao, 
+                editarVm.NumeroSerie,
+                fabricanteSelecionado,
+                editarVm.DataFabricacao);
 
-            bool edicaoConcluida = repositorioEquipamento.EditarRegistro(id, equipamentoEditado);
+                repositorioEquipamento.EditarRegistro(Id, equipamentoEditado);
 
-            if (!edicaoConcluida)
-            {
-                equipamentoEditado.Id = id;
-                return View(equipamentoEditado);
-
-            }
-
-            return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index));
         }
 
         public IActionResult Excluir(Guid Id)
@@ -102,10 +108,12 @@ namespace GestaoDeEquipamento.WebApp.Controllers
 
             Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(Id);
 
-            if (equipamentoSelecionado == null)
-                return RedirectToAction(nameof(Index));
+            ExcluirEquipamentoViewModel excluirVm = new ExcluirEquipamentoViewModel(
+                equipamentoSelecionado.Id,
+                equipamentoSelecionado.Nome
+                );
 
-            return View(equipamentoSelecionado);
+            return View(excluirVm);
         }
 
         [HttpPost]

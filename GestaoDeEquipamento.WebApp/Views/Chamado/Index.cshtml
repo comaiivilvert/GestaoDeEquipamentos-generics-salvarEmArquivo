@@ -1,11 +1,13 @@
-﻿@using GestaoDeEquipamentos.Dominio.ModuloChamado
+﻿@using GestaoDeEquipamento.WebApp.Models
+@using GestaoDeEquipamentos.Dominio.ModuloChamado
+@using GestaoDeEquipamentos.WebApp.Models
 
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Visualização de Chamados";
 }
 
-@model List<Chamado>
+@model VisualizarChamadosViewModel
 
 
 <a class="btn btn-primary" href="/Chamado/Cadastrar">
@@ -14,7 +16,7 @@
 </a>
 
     <div class="row mt-3">
-        @foreach (Chamado c in Model)
+        @foreach (DetalhesChamadoViewModel c in Model.Registros)
         {
             <div class="col-4 mb-3">
                 <div class="card">
@@ -22,7 +24,7 @@
                         <h5 class="card-title">@c.Titulo</h5>
                         <p class="card-text mb-0"><strong>Descrição:</strong> @c.Descricao</p>
                         <p class="card-text mb-0"><strong>Data de Abertura:</strong> @c.DataAbertura.ToString("d")</p>
-                        <p class="card-text mb-0"><strong>Equipamento:</strong> @c.Equipamento.Nome</p>
+                        <p class="card-text mb-0"><strong>Equipamento:</strong> @c.NomeEquipamento</p>
                     </div>
 
                     <div class="card-actions ms-auto me-3 mb-3 d-flex gap-1">
